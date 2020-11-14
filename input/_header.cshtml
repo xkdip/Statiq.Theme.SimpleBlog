@@ -1,13 +1,16 @@
+@using System.Linq;
 @{
-  var exlinks = (Statiq.Common.IDocument[])  @Document["exlinks"];
-  var isHome = Document.GetString("Layout") == "home";
+  var exlinks = (IDocument[])  @Document["exlinks"];
+  var mainsites = (IDocument[])  @Document["mainsite"];
+  var mainsite = mainsites?.Single();
 }
 
 <header class="site-header" role="banner">
   <div class="wrapper">
-    @if (!isHome)
+    <!-- 主站链接 -->
+    @if (mainsite != null)
     {
-      <a class="site-title" href="">@Document.GetString("SiteTitle")</a>
+      <a class="site-title" href='@mainsite["link"]'>@mainsite["title"]</a>
     }
 
     <nav class="site-nav">
