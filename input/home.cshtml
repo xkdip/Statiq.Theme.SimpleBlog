@@ -16,6 +16,10 @@
   </head>
 
   <body>
+
+    <!-- Site Header -->
+    @RenderSectionOrPartial("Header", "_header")
+
     <section class="page-header" style="padding-top: 80px; padding-bottom: 40px; background: linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.0)), url('assets/img/home-header.jpg') center center repeat;">
       <h1 class="project-name">@title</h1>
       <h2 class="project-tagline">@tagline</h2>
