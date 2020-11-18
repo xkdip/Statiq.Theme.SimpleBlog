@@ -25,9 +25,13 @@
       <h2 class="project-tagline">@tagline</h2>
       <a href="" class="btn">No Source Code</a>
     </section>
-    <div class="container">
+
+    <section class="main-content">
       @RenderBody()
-    </div>
+
+      <!-- Site Header -->
+      @RenderSectionOrPartial("Footer", "_footer")
+    </section>
   </body>
 
 </html>
