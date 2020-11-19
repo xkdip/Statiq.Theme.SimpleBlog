@@ -1,16 +1,15 @@
 @using System.Linq;
 @{
     var exLinks = Document.GetDocuments("ExLinks");
-    var mainSiteTitle = Document.GetString("MainSiteTitle");
-    var mainSiteLink = Document.GetString("MainSiteLink");
+    var siteTitle = Document.GetString("SiteTitle");
 }
 
 <header class="site-header" role="banner">
     <div class="wrapper">
-        <!-- 主站链接 -->
-        @if (mainSiteTitle != null && mainSiteLink != null)
+        <!-- 主页链接 -->
+        @if (siteTitle != null)
         {
-            <a class="site-title" href='@mainSiteLink'>@mainSiteTitle</a>
+            <a class="site-title" href='/'>@siteTitle</a>
         }
 
     <nav class="site-nav">
