@@ -1,4 +1,4 @@
-﻿@{
+@{
     var title = Document.GetString("Title") ?? Document.GetString("SiteTitle");
     var tags = Document.GetList<string>("Tag");
 }
@@ -18,7 +18,7 @@
 <body>
 
     <!-- Site Header -->
-    @RenderSectionOrPartial("Header", "_postHeader")
+    @RenderSectionOrPartial("Header", "_include/_header-of-post")
 
     <section class="page-header" style="padding-top: 80px; padding-bottom: 40px; background: linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.0)), url('/assets/img/home-header.jpg') center center repeat;">
         <h1 class="project-name">@title</h1>
@@ -32,7 +32,7 @@
         @RenderBody()
 
         <!-- Site Header -->
-        @RenderSectionOrPartial("Footer", "_footer")
+        @RenderSectionOrPartial("Footer", "_include/_footer")
     </section>
 </body>
 
