@@ -1,0 +1,8 @@
+@{ var cnzzId = Document.GetString("CnzzId"); }
+
+@if (!string.IsNullOrEmpty(cnzzId))
+{
+<div style="display:none">
+  <script type="text/javascript" src="https://v1.cnzz.com/z_stat.php?id=@cnzzId&web_id=@cnzzId"></script>
+</div>
+}

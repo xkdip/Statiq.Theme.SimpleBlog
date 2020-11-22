@@ -1,4 +1,4 @@
-@{ var title = @Document.GetString("Title") ?? @Document.GetString("SiteTitle");
+﻿@{ var title = @Document.GetString("Title") ?? @Document.GetString("SiteTitle");
         var tagline = @Document.GetString("TagLine") ?? @Document.GetString("SiteTagLine"); }
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 <body>
 
   <!-- Site Header -->
-  @RenderSectionOrPartial("Header", "_include/_header")
+  @RenderSectionOrPartial("Header", "include/_header")
 
   <section class="page-header" style="padding-top: 80px; padding-bottom: 40px; background: linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.0)), url('/assets/img/home-header.jpg') center center repeat;">
     <h1 class="project-name">@title</h1>
@@ -28,12 +28,16 @@
 
     <!-- Posts -->
     <div>
-      @Html.Partial("_include/_posts", Document)
+      @Html.Partial("include/_posts", Document)
     </div>
 
     <!-- Site Header -->
-    @RenderSectionOrPartial("Footer", "_include/_footer")
+    @RenderSectionOrPartial("Footer", "include/_footer")
   </section>
+
+  <!-- Site Stat -->
+  @RenderSectionOrPartial("Stat", "include/_stat")
+
 </body>
 
 </html>
