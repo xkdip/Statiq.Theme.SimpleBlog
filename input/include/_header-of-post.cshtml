@@ -1,7 +1,7 @@
 @using System.Linq;
 @{
-  var exLinks = Document.GetDocuments("ExLinks");
-  var siteTitle = Document.GetString("SiteTitle");
+  var exLinks = Document.GetDocuments("ExLinks") ?? new List<Document>();
+  var siteTitle = Document.GetString("SiteTitle") ?? string.Empty;
 }
 
 <header class="site-header" role="banner">
