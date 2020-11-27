@@ -1,8 +1,8 @@
 @using System.Linq;
 @{
-    var exLinks = Document.GetDocuments("ExLinks");
-    var mainSiteTitle = Document.GetString("MainSiteTitle");
-    var mainSiteLink = Document.GetString("MainSiteLink");
+    var exLinks = Document.GetDocuments("ExLinks") ?? new List<Document>();
+    var mainSiteTitle = Document.GetString("MainSiteTitle") ?? string.Empty;
+    var mainSiteLink = Document.GetString("MainSiteLink") ?? string.Empty;
 }
 
 <header class="site-header" role="banner">

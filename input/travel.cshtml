@@ -1,0 +1,101 @@
+@{
+  var title = "旅行";
+  var tagline = "谨防迷路";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#157878">
+  <title>@title</title>
+  <link href="@Context.GetLink("/scss/style.css")" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- Site Header -->
+  @RenderSectionOrPartial("Header", "include/_header")
+
+  <section class="page-header" style="padding-top: 80px; padding-bottom: 40px; background: linear-gradient(0deg,rgba(0,0,0,0.2),rgba(0,0,0,0.0)), url('/assets/img/home-header.jpg') center center repeat;">
+    <h1 class="project-name">@title</h1>
+    <h2 class="project-tagline">@tagline</h2>
+  </section>
+
+  <section class="main-content">
+    @RenderBody()
+
+    <div id="test" />
+
+    <!-- Remote Content -->
+    <!-- Site Footer -->
+    @RenderSectionOrPartial("Footer", "include/_footer")
+  </section>
+
+  <script>
+    var testText = `
+          <div>
+            <p>Test</p>
+            <img class="private-image" data-src="https://api.github.com/repos/xkdip/image2/contents/2020/11/test.png?ref=main" />
+          </div>`
+
+    var init = {
+      headers: {
+        'Authorization': 'token _token_',
+        'Accept': 'application/vnd.github.v3.raw',
+      },
+    };
+
+    // 'https://api.github.com/repos/xkdip/hermit/contents/docs/test/index.html?ref=develop'
+    function handleContent(url) {
+      fetch(url, init)
+        .then(rsp => rsp.text())
+        .then(text => {
+          console.log('load content...');
+          document.getElementById("test").innerHTML = testText;
+          handleImgs();
+        })
+        .catch(() => {
+          throw new Error('Txt load FAILED.');
+        });
+    }
+
+    function handleImgs() {
+      var imgs = document.querySelectorAll('.private-image');
+      Array.from(imgs).forEach(el => {
+        if (!el.src) {
+          var source = el.dataset.src;
+          fetch(source, init)
+            .then(rsp => rsp.blob())
+            .then(blob => {
+              console.log('load img...');
+              el.src = URL.createObjectURL(blob);
+            })
+            .catch(() => {
+              throw new Error('Image load FAILED.');
+            });
+        }
+      })
+    }
+
+    function getQueryString(name) {
+      let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+      let r = window.location.search.substr(1).match(reg);
+      if (r != null) {
+        return decodeURIComponent(r[2]);
+      };
+      return null;
+    }
+
+    var url = getQueryString("url");
+    if (url) {
+      handleContent(url);
+    }
+
+  </script>
+</body>
+
+</html>
