@@ -1,19 +1,16 @@
 @model IDocument
 
 @{
-  string excerpt = Model.GetString(Statiq.Html.HtmlKeys.Excerpt);
+  var excerpt = Model.GetString(Statiq.Html.HtmlKeys.Excerpt);
+  var date = Model.GetDateTime(WebKeys.Updated, Model.GetDateTime("Created", Model.GetDateTime(WebKeys.Published)));
+  var tags = Model.GetList<string>("Tag");
+  var undone = tags?.Contains("未完成");
 }
 
+@*未完成的就不显示了*@
+@if (undone.HasValue && !undone.Value)
+{
 <div class="post-preview">
-  <h2 class="post-title">@Html.DocumentLink(Model)</h2>
-  @if (Model.ContainsKey("Lead"))
-  {
-    <div class="post-subtitle">@Model.GetString("Lead")</div>
-  }
-  <p class="post-meta">始发于 @Model.GetDateTime(WebKeys.Published).ToLongDateString()</p>
-  @if (!string.IsNullOrEmpty(excerpt))
-  {
-    @Html.Raw(excerpt)
-    <p class="small"><a href="@Context.GetLink(Model)">Read more...</a></p>
-  }
+  <h2 class="post-title">@date.ToString("yyyy/MM/dd") @Html.DocumentLink(Model)</h2>
 </div>
+}
