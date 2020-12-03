@@ -8,7 +8,7 @@
 }
 
 @*未完成的就不显示了*@
-@if (undone.HasValue && !undone.Value)
+@if (!undone.HasValue || !undone.Value)
 {
 <div class="post-preview">
   <h2 class="post-title">@date.ToString("yyyy/MM/dd") @Html.DocumentLink(Model)</h2>
