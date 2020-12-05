@@ -3,14 +3,8 @@
 @{
   var excerpt = Model.GetString(Statiq.Html.HtmlKeys.Excerpt);
   var date = Model.GetDateTime(WebKeys.Updated, Model.GetDateTime("Created", Model.GetDateTime(WebKeys.Published)));
-  var tags = Model.GetList<string>("Tag");
-  var undone = tags?.Contains("未完成");
 }
 
-@*未完成的就不显示了*@
-@if (!undone.HasValue || !undone.Value)
-{
 <div class="post-preview">
   <h2 class="post-title">@date.ToString("yyyy/MM/dd") @Html.DocumentLink(Model)</h2>
 </div>
-}
